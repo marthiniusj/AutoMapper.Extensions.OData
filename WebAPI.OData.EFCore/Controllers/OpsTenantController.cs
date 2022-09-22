@@ -61,7 +61,14 @@ namespace WebAPI.OData.EFCore.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(ODataQueryOptions<OpsCity> options)
         {
-            return Ok(await Repository.City.GetQueryAsync(_mapper, options, new QuerySettings { ODataSettings = new ODataSettings { HandleNullPropagation = HandleNullPropagationOption.False } }));
+            var par = new {
+                builderId = 1
+            };
+
+            return Ok(await Repository.City.GetQueryAsync(_mapper, options, new QuerySettings {
+                ProjectionSettings = new ProjectionSettings { Parameters = par },
+                ODataSettings = new ODataSettings { HandleNullPropagation = HandleNullPropagationOption.False }
+            }));
         }
     }
 }
