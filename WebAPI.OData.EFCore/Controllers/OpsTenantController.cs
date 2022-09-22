@@ -46,4 +46,22 @@ namespace WebAPI.OData.EFCore.Controllers
             return Ok(await Repository.BuildingSet.GetQueryAsync(_mapper, options, new QuerySettings { ODataSettings = new ODataSettings { HandleNullPropagation = HandleNullPropagationOption.False } }));
         }
     }
+
+    public class OpsCityController : ODataController
+    {
+        private readonly IMapper _mapper;
+        public OpsCityController(MyDbContext repository, IMapper mapper)
+        {
+            Repository = repository;
+            _mapper = mapper;
+        }
+
+        MyDbContext Repository { get; set; }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(ODataQueryOptions<OpsCity> options)
+        {
+            return Ok(await Repository.City.GetQueryAsync(_mapper, options, new QuerySettings { ODataSettings = new ODataSettings { HandleNullPropagation = HandleNullPropagationOption.False } }));
+        }
+    }
 }

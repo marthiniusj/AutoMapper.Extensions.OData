@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,5 +19,7 @@ namespace DAL.EFCore
         public Int32 CityId { get; set; }
 
         public TCity City { get; set; }
+
+        public virtual ICollection<TBuilding> Buildings { get; set; }
     }
 }
